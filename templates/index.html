@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>监控中心</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar__header">
+          <h1 class="sidebar__title">监控中心</h1>
+          <div class="sidebar__actions">
+            <button id="refresh-btn" class="refresh-btn" type="button"><span>刷新</span></button>
+            <button id="toggle-sidebar" class="sidebar-toggle" type="button" title="收起侧边栏">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <ul id="camera-list" class="camera-list"></ul>
+      </aside>
+      <main class="content">
+        <section id="camera-grid" class="camera-grid"></section>
+      </main>
+    </div>
+    <script src="/static/script.js"></script>
+  </body>
+</html>

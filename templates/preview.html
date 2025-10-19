@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ camera.name }} - 实时预览</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body class="preview-page">
+    <header class="preview-page__toolbar">
+      <div class="preview-page__info">
+        <button class="toolbar-btn toolbar-btn--secondary" type="button" onclick="window.location.href = '/'">返回</button>
+        <div>
+          <h1 class="preview-page__title">{{ camera.name }}</h1>
+          <span id="preview-status" class="preview-page__status">实时预览</span>
+        </div>
+      </div>
+      <nav class="preview-page__actions">
+        <div class="settings-group">
+          <label for="resolution-select" class="settings-label">分辨率:</label>
+          <select id="resolution-select" class="settings-select">
+            <option value="">自动检测...</option>
+          </select>
+        </div>
+        <div class="settings-group">
+          <label for="fps-select" class="settings-label">帧率:</label>
+          <select id="fps-select" class="settings-select">
+            <option value="">自动检测...</option>
+          </select>
+        </div>
+        <button id="apply-settings" type="button" class="toolbar-btn toolbar-btn--primary">应用设置</button>
+        <button id="pause-btn" type="button" class="toolbar-btn">暂停</button>
+      </nav>
+    </header>
+
+    <main class="preview-page__body">
+      <figure class="preview-page__frame">
+        <img
+          id="preview-feed"
+          class="preview-page__feed"
+          src="/video_feed/{{ camera.camera_id }}"
+          alt="{{ camera.name }} 视频流"
+          data-camera-id="{{ camera.camera_id }}"
+          data-camera-name="{{ camera.name }}"
+        />
+      </figure>
+    </main>
+
+    <script src="/static/preview.js"></script>
+  </body>
+</html>
