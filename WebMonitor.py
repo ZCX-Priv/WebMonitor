@@ -1,5 +1,6 @@
 import configparser
 import os
+import sys
 import threading
 from dataclasses import dataclass
 from typing import Dict, List, Tuple, Optional
@@ -8,7 +9,15 @@ import cv2
 from flask import Flask, Response, abort, jsonify, render_template, request, stream_with_context
 
 
-CONFIG_PATH = os.path.join(os.path.dirname(__file__), "config.ini")
+# 检测是否是打包后的exe文件
+if getattr(sys, 'frozen', False):
+    # 打包后的exe文件
+    BASE_DIR = os.path.dirname(sys.executable)
+else:
+    # 正常Python脚本
+    BASE_DIR = os.path.dirname(__file__)
+
+CONFIG_PATH = os.path.join(BASE_DIR, "config.ini")
 MAX_CAMERA_INDEX = 10
 
 # 常见的分辨率选项
@@ -173,7 +182,10 @@ def capture_frame(camera_id: int):
         cap.release()
 
 
-app = Flask(__name__)
+# 创建Flask应用，设置模板和静态文件路径
+app = Flask(__name__, 
+            template_folder=os.path.join(BASE_DIR, 'templates'),
+            static_folder=os.path.join(BASE_DIR, 'static'))
 _config = load_config()
 
 _camera_cache: Dict[int, CameraInfo] = {}
